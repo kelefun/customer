@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.funstill.customer.module.dao.CustomerDao;
 import com.funstill.customer.module.model.Customer;
+import com.funstill.customer.module.model.CustomerQuery;
 import com.funstill.customer.util.HsqlUtil;
 
 @Repository
@@ -19,7 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Integer insert(Customer record) {
 		HsqlUtil hsql = new HsqlUtil();
 		hsql.getConnection();
-		String sql = "insert into customer (realname,mobile,extra,createDate) values (?,?,?,now())";
+		String sql = "insert into customer (realname,mobile,extra,create_date) values (?,?,?,now())";
 		List<Object> params = new ArrayList<>();
 		params.add(record.getRealname());
 		params.add(record.getMobile());
@@ -48,15 +49,15 @@ public class CustomerDaoImpl implements CustomerDao {
 		String sql = "update customer set";
 		List<Object> params = new ArrayList<>();
 		if (StringUtils.isNotBlank(record.getMobile())) {
-			sql += " mobile = ? ";
+			sql += " mobile = ? ,";
 			params.add(record.getMobile());
 		}
 		if (StringUtils.isNotBlank(record.getRealname())) {
-			sql += " realname = ? ";
+			sql += " realname = ? ,";
 			params.add(record.getRealname());
 		}
 		if (StringUtils.isNotBlank(record.getExtra())) {
-			sql += " extra = ? ";
+			sql += " extra = ? ,";
 			params.add(record.getExtra());
 		}
 		sql += " update_date = now() where id = ?";
@@ -66,11 +67,6 @@ public class CustomerDaoImpl implements CustomerDao {
 		return result;
 	}
 
-	@Override
-	public List<Customer> query() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Customer selectById(Long id) {
@@ -100,6 +96,62 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 		hsql.releaseConn();
 		return customer;
+	}
+
+	@Override
+	public List<Customer> selectList(CustomerQuery query) {
+		HsqlUtil hsql = new HsqlUtil();
+		hsql.getConnection();
+		String sql = "SELECT * FROM customer where 1 = 1";
+		List<Object> params = new ArrayList<>();
+		if (StringUtils.isNotBlank(query.getMobile())) {
+			sql += "and mobile = ? ";
+			params.add(query.getMobile());
+		}
+		if (StringUtils.isNotBlank(query.getRealname())) {
+			sql += "and realname = ? ";
+			params.add(query.getRealname());
+		}
+		if (StringUtils.isNotBlank(query.getExtra())) {
+			sql += "and extra = ? ";
+			params.add(query.getExtra());
+		}
+		
+		if (query.isPage()) {
+			sql += " limit ? offset ? ";
+			params.add(query.getPageSize());
+			params.add(query.getStartRow());
+		}
+		ResultSet resultSet = hsql.executeQuery(sql, params);
+		List<Customer> customerList = new ArrayList<>();
+		try {
+			while (resultSet.next()) {
+				Customer customer = new Customer();
+				customer.setId(resultSet.getLong("id"));
+				customer.setMobile(resultSet.getString("mobile"));
+				customer.setRealname(resultSet.getString("realname"));
+				customer.setExtra(resultSet.getString("extra"));
+				customer.setCreateDate(resultSet.getDate("create_date"));
+				
+				customerList.add(customer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		hsql.releaseConn();
+		return customerList;
+	}
+
+	@Override
+	public Integer selectCountList(CustomerQuery query) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

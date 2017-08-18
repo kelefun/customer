@@ -1,11 +1,14 @@
 package com.funstill.customer.module.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.funstill.customer.module.dao.CustomerDao;
 import com.funstill.customer.module.model.Customer;
+import com.funstill.customer.module.model.CustomerQuery;
 import com.funstill.customer.module.service.CustomerService;
 
 @Service("customerService")
@@ -37,6 +40,16 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public CustomerDao getDao() {
 		return customerDao;
+	}
+
+	@Override
+	public List<Customer> selectList(CustomerQuery query) {
+		return getDao().selectList(query);
+	}
+
+	@Override
+	public Integer selectCountList(CustomerQuery query) {
+		return getDao().selectCountList(query);
 	}
 
 }

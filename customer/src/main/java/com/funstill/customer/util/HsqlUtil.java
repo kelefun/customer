@@ -7,7 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class HsqlUtil {
+	private final Logger log=LogManager.getLogger("hsql=");
 	private Connection connection;
 
 	// 定义sql语句的执行对象
@@ -38,6 +42,7 @@ public class HsqlUtil {
 				}
 			}
 			result = pstmt.executeUpdate();
+			log.debug(pstmt.toString());
 		}catch(SQLException se){
 			se.printStackTrace();
 		}
@@ -60,6 +65,7 @@ public class HsqlUtil {
 				}
 			}
 			result = pstmt.executeQuery();
+			log.debug(pstmt.toString());
 		}catch(SQLException se){
 			se.printStackTrace();
 		}
