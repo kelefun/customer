@@ -37,5 +37,16 @@ public class CustomerController {
     public Integer insert(Customer customer) {
         return customerService.insert(customer);
     }
-
+    
+    
+    @RequestMapping("/update")
+    @ResponseBody
+    public Integer update(Customer customer) {
+        return customerService.updateById(customer);
+    }
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Integer delete(Long id) {
+        return customerService.deleteById(id);
+    }
 }
