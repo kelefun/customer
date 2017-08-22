@@ -2,19 +2,21 @@ package com.funstill.customer.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author liukaiyang
  * @version v1.0.0
  */
 @Controller
-@RequestMapping("view")
-public class PageController {
+public class IndexController {
 
-    @GetMapping(value={"customer/index"})
+    @GetMapping(value={"/","/index"})
     public String index() {
-        return "view/customer/customer-index.html";
+        return "view/index.html";
+    }
+    @GetMapping(value={"/login"})
+    public String login() {
+        return "view/login.html";
     }
     
 }
