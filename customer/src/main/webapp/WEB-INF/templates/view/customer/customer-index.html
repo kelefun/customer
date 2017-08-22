@@ -2,48 +2,35 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>layui</title>
-  <link rel="stylesheet" href="/static/layui/css/layui.css"  media="all">
+  <title>客户列表</title>
+  <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
 </head>
 <body>
  
-<table class="layui-table">
-  <thead>
-    <tr>
-      <th lay-data="{field:'username'}">昵称</th>
-      <th lay-data="{field:'joinTime'}">加入时间</th>
-      <th lay-data="{field:'sign'}">签名</th>
-    </tr> 
-  </thead>
-  <tbody>
-    <tr>
-      <td>贤心1</td>
-      <td>2016-11-28</td>
-      <td>人生就像是一场修行a</td>
-    </tr>
-    <tr>
-      <td>贤心2</td>
-      <td>2016-11-29</td>
-      <td>人生就像是一场修行b</td>
-    </tr>
-    <tr>
-      <td>贤心3</td>
-      <td>2016-11-30</td>
-      <td>人生就像是一场修行c</td>
-    </tr>
-  </tbody>
+<table id="customer-table" >
 </table>
  
- 
-               
-          
-<script src="/static/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/static/layui/layui.js"></script>
 <script>
 layui.use('table', function(){
   var table = layui.table;
+  table.render({ //其它参数在此省略
+	 elem:"#customer-table",
+	 url:"/customer/test",
+	 where: {token: 'sasasas', id: 123},
+	 page:true,
+	  limit: 20, //默认采用20
+	 cols: [[ //标题栏
+	      {checkbox: true, LAY_CHECKED: false}
+	      ,{field: 'id', title: 'ID', width: 30}
+	      ,{field: 'realname', title: '姓名', width: 100}
+	      ,{field: 'mobile',title: '电话', width: 100}
+	      ,{field: 'createDate',title: '创建时间', width: 150}
+	      ,{field: 'extra',title: '备注', width: 280}
+	    ]] 
+//	  method: 'post'
+	}); 
 });
 </script>
-
 </body>
 </html>

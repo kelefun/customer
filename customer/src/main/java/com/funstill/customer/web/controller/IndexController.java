@@ -14,9 +14,24 @@ public class IndexController {
     public String index() {
         return "view/index.html";
     }
-    @GetMapping(value={"/login"})
-    public String login() {
+    /**
+     * 登录页面
+     * @author liukaiyang 2017年8月22日
+     * @return
+     */
+    @GetMapping(value={"view/login"})
+    public String getLoginView() {
         return "view/login.html";
     }
     
+    /**
+     * 登录实现
+     * @author liukaiyang 2017年8月22日
+     * @return
+     */
+    @GetMapping(value={"login"})
+    public String login() {
+    	//TODO 
+        return "view/index.html";
+    }
 }
