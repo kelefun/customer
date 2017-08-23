@@ -16,7 +16,7 @@ public class ResultModel<T>{
 	}
 
 	public ResultModel(T t) {
-		module = t;
+		this.setData(t);
 	}
 
 	/**
@@ -26,19 +26,11 @@ public class ResultModel<T>{
 	/**
 	 * 备注信息
 	 */
-	private String errMsg;
+	private String msg;
 	/**
 	 * 结果返回的业务数据
 	 */
-	private T module;
-
-	/**
-	 * 操作是否成功
-	 * @return
-	 */
-	public boolean isSuccess() {
-		return DefaultResultCode.SUCCESS == code ? true : false;
-	}
+	private T data;
 
 	/**
 	 * 设置操作成功
@@ -60,12 +52,12 @@ public class ResultModel<T>{
 	 * @param error
 	 * @param msg
 	 */
-	public void putError(ResultCode error, String msg) {
-		this.code = error;
+	public void putError(ResultCode resutCode, String msg) {
+		this.code = resutCode;
 		if (StringUtils.isBlank(msg)) {
-			this.errMsg = error.getMsg();
+			this.setMsg(resutCode.getMsg());
 		} else {
-			this.errMsg = msg;
+			this.setMsg(msg);
 		}
 	}
 
@@ -73,12 +65,12 @@ public class ResultModel<T>{
 	 * 填充错误信息
 	 * @param error
 	 */
-	public void putError(ResultModel<?> error) {
-		this.code = error.getCode();
-		if (StringUtils.isBlank(error.getErrMsg())) {
-			this.errMsg = error.getCode().getMsg();
+	public void putError(ResultModel<?> resultModel) {
+		this.code = resultModel.getCode();
+		if (StringUtils.isBlank(resultModel.getMsg())) {
+			this.setMsg(resultModel.getCode().getMsg());
 		} else {
-			this.errMsg = error.getErrMsg();
+			this.setMsg(resultModel.getMsg());
 		}
 	}
 
@@ -90,19 +82,20 @@ public class ResultModel<T>{
 		this.code = code;
 	}
 
-	public T getModule() {
-		return module;
+	public String getMsg() {
+		return msg;
 	}
 
-	public void setModule(T module) {
-		this.module = module;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
-	public String getErrMsg() {
-		return errMsg;
+	public T getData() {
+		return data;
 	}
 
-	public void setErrMsg(String errMsg) {
-		this.errMsg = errMsg;
+	public void setData(T data) {
+		this.data = data;
 	}
+
 }

@@ -1,40 +1,48 @@
 package com.funstill.customer.base.model;
 
 public class PageModel {
-    //每页多少条数据  
-    private int pageSize=20;  
+    /**
+     *每页多少条数据 
+     */ 
+    private int limit=20;  
       
-    //第几页  
-    private int pageIndex=1; 
+    /**
+     * 第几页 
+     */
+    private int page=1; 
     
-    private boolean isPage=true;
+    /**
+     * 是否分页
+     */
+    private boolean setPage=true;
   
-    public int getPageSize() {  
-        return pageSize;  
-    }  
-  
-    public void setPageSize(int pageSize) {  
-        this.pageSize = pageSize;  
-    }
-
-
-	public int getPageIndex() {
-		return pageIndex;
+    
+    public int getLimit() {
+		return limit;
 	}
 
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 
-	public void setPageIndex(int pageIndex) {
-		this.pageIndex = pageIndex;
-	}  
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public boolean isSetPage() {
+		return setPage;
+	}
+
+	public void setSetPage(boolean setPage) {
+		this.setPage = setPage;
+	}
+
 	public int getStartRow() {
-		return pageSize * (pageIndex - 1);
+		return limit * (page - 1);
 	}
 
-	public boolean isPage() {
-		return isPage;
-	}
-
-	public void setPage(boolean isPage) {
-		this.isPage = isPage;
-	}
 }

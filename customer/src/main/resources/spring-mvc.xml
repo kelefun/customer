@@ -28,8 +28,8 @@
                 <value type="java.lang.Class">com.funstill.customer.base.annotation.HtmlRequired</value>
             </list>
         </property>
-        <property name="annotationErrorView" value="exception/htmlErr"/>
-        <property name="defaultErrorView" value="exception/jsonErr"/>
+        <property name="annotationErrorView" value="exception/htmlErr.ftl"/>
+        <property name="defaultErrorView" value="exception/jsonErr.ftl"/>
         <property name="order" value="0"/>
 	</bean>
 

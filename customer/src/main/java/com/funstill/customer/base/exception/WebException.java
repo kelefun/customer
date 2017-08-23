@@ -31,7 +31,7 @@ public class WebException extends RuntimeException {
 	}
 
 	public WebException(ResultModel resultModel) {
-		super(resultModel.getErrMsg());
+		super(resultModel.getMsg());
 		this.resultModel = resultModel;
 	}
 
@@ -46,7 +46,7 @@ public class WebException extends RuntimeException {
 	}
 
 	public WebException(ResultModel resultModel, Throwable throwable) {
-		super(resultModel.getErrMsg(), throwable);
+		super(resultModel.getMsg(), throwable);
 		this.resultModel = resultModel;
 	}
 

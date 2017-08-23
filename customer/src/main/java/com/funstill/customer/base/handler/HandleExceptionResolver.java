@@ -42,7 +42,7 @@ public class HandleExceptionResolver extends SimpleMappingExceptionResolver {
 			WebException webException = (WebException) ex;
 			if (webException.getResultModel() != null) {
 				resultModel = webException.getResultModel();
-				logger.error(resultModel.getErrMsg());
+				logger.error(resultModel.getMsg());
 			} else {
 				resultModel.putError(DefaultResultCode.ERROR_UNKNOWN_REASON, webException.getMessage());
 			}

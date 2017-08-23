@@ -110,9 +110,9 @@ public class BillDaoImpl implements BillDao {
 			params.add(query.getCreateDate());
 		}
 		
-		if (query.isPage()) {
+		if (query.isSetPage()) {
 			sql += " limit ? offset ? ";
-			params.add(query.getPageSize());
+			params.add(query.getLimit());
 			params.add(query.getStartRow());
 		}
 		ResultSet resultSet = hsql.executeQuery(sql, params);
