@@ -2,6 +2,7 @@ package com.funstill.customer.base.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.funstill.customer.base.result.DefaultResultCode;
 import com.funstill.customer.base.result.ResultCode;
 
@@ -22,11 +23,14 @@ public class ResultModel<T>{
 	/**
 	 * 结果返回的code
 	 */
-	private ResultCode code = DefaultResultCode.SUCCESS;
+	@JsonIgnore
+	private ResultCode resultCode = DefaultResultCode.SUCCESS;
+	
+	private int code;
 	/**
 	 * 备注信息
 	 */
-	private String msg;
+	private String msg=resultCode.getMsg();
 	/**
 	 * 结果返回的业务数据
 	 */
@@ -36,7 +40,7 @@ public class ResultModel<T>{
 	 * 设置操作成功
 	 */
 	public void markSuccess() {
-		this.code = DefaultResultCode.SUCCESS;
+		this.resultCode = DefaultResultCode.SUCCESS;
 	}
 
 	/**
@@ -53,7 +57,7 @@ public class ResultModel<T>{
 	 * @param msg
 	 */
 	public void putError(ResultCode resutCode, String msg) {
-		this.code = resutCode;
+		this.resultCode = resutCode;
 		if (StringUtils.isBlank(msg)) {
 			this.setMsg(resutCode.getMsg());
 		} else {
@@ -66,20 +70,20 @@ public class ResultModel<T>{
 	 * @param error
 	 */
 	public void putError(ResultModel<?> resultModel) {
-		this.code = resultModel.getCode();
+		this.resultCode = resultModel.getResultCode();
 		if (StringUtils.isBlank(resultModel.getMsg())) {
-			this.setMsg(resultModel.getCode().getMsg());
+			this.setMsg(resultModel.getResultCode().getMsg());
 		} else {
 			this.setMsg(resultModel.getMsg());
 		}
 	}
 
-	public ResultCode getCode() {
-		return code;
+	public ResultCode getResultCode() {
+		return resultCode;
 	}
 
-	public void setCode(ResultCode code) {
-		this.code = code;
+	public void setResultCode(ResultCode resultCode) {
+		this.resultCode = resultCode;
 	}
 
 	public String getMsg() {
@@ -96,6 +100,14 @@ public class ResultModel<T>{
 
 	public void setData(T data) {
 		this.data = data;
+	}
+
+	public int getCode() {
+		return resultCode.getCode();
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 }

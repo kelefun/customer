@@ -1,6 +1,7 @@
 package com.funstill.customer.web.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.funstill.customer.base.model.PageResult;
 import com.funstill.customer.module.model.Customer;
 import com.funstill.customer.module.model.CustomerQuery;
 import com.funstill.customer.module.service.CustomerService;
@@ -29,8 +31,14 @@ public class CustomerController {
 
     @GetMapping("/list")
     @ResponseBody
-    public List<Customer> list(CustomerQuery query) {
-        return customerService.selectList(query);
+    public PageResult<Customer> list(CustomerQuery query) {
+        int count = customerService.selectCountList(query);
+        if(count==0){
+        	return PageResult.fetchPage(count,Collections.emptyList());
+        }else{
+        	return PageResult.fetchPage(count,customerService.selectList(query));
+        }
+         
     }
 
     @RequestMapping("/insert")

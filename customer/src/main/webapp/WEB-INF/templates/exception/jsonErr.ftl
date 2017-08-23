@@ -1,4 +1,4 @@
-<#include "layout/json.ftl"/>
+<#include "base/result.ftl"/>
 
 <@json>
     "${data!""}"

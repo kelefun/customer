@@ -19,7 +19,7 @@ public class Test {
 		Statement stmt = conn.createStatement();
 		
 //		create(stmt);
-//		insert(stmt);
+		insert(stmt);
 		print(stmt);
 		
 		stmt.close();
@@ -42,7 +42,7 @@ public class Test {
 		}
 	}
 	private static void insert(Statement stmt)throws SQLException{
-		String insertSql = "INSERT INTO customer(ID, REALNAME, CREATE_DATE) VALUES ('2', 'TEST', SYSDATE);";
+		String insertSql = "INSERT INTO customer(ID, REALNAME, CREATE_DATE) VALUES ('5', '哈哈', SYSDATE);";
 		stmt.execute(insertSql);
 	}
 }

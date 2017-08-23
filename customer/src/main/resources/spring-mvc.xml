@@ -19,7 +19,15 @@
 	<context:component-scan base-package="com.funstill.customer.web.controller" />
 	<context:component-scan base-package="com.funstill.customer.module.dao" />
 	<context:component-scan base-package="com.funstill.customer.module.service.impl" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+	  <mvc:message-converters> 
+        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+            <property name="objectMapper"> 
+                <bean class="com.funstill.customer.util.JsonNullString"></bean> 
+            </property> 
+        </bean> 
+    </mvc:message-converters> 
+	</mvc:annotation-driven>
 
 	<!-- 异常处理 -->
 	<bean id="simpleMappingExceptionResolver" class="com.funstill.customer.base.handler.HandleExceptionResolver">
@@ -33,28 +41,4 @@
         <property name="order" value="0"/>
 	</bean>
 
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean id="jsonConverter"
-					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/html;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-				<!-- string -->
-				<bean id="stringConverter"
-					class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>
 </beans>

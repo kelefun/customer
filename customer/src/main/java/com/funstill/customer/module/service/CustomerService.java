@@ -11,4 +11,5 @@ public interface CustomerService extends BaseService<Customer>{
 	public List<Customer> selectList(CustomerQuery query); 
 	
 	public Integer selectCountList(CustomerQuery query);
+	
 }

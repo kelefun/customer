@@ -150,8 +150,44 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Integer selectCountList(CustomerQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+		HsqlUtil hsql = new HsqlUtil();
+		hsql.getConnection();
+		String sql = "SELECT count(1) FROM customer where 1 = 1";
+		List<Object> params = new ArrayList<>();
+		if (StringUtils.isNotBlank(query.getMobile())) {
+			sql += "and mobile = ? ";
+			params.add(query.getMobile());
+		}
+		if (StringUtils.isNotBlank(query.getRealname())) {
+			sql += "and realname = ? ";
+			params.add(query.getRealname());
+		}
+		if (StringUtils.isNotBlank(query.getExtra())) {
+			sql += "and extra = ? ";
+			params.add(query.getExtra());
+		}
+		
+		if (query.isSetPage()) {
+			sql += " limit ? offset ? ";
+			params.add(query.getLimit());
+			params.add(query.getStartRow());
+		}
+		ResultSet resultSet = hsql.executeQuery(sql, params);
+		try {
+			while (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		hsql.releaseConn();
+		return 0;
 	}
 
 }

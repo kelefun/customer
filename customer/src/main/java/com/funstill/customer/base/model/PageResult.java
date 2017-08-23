@@ -1,6 +1,8 @@
 package com.funstill.customer.base.model;
 
-public class PageResult<T> extends ResultModel<T>{
+import java.util.List;
+
+public class PageResult<T> extends ResultModel<List<T>>{
 
 	private int count;
 
@@ -10,5 +12,12 @@ public class PageResult<T> extends ResultModel<T>{
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+	
+	public static <T> PageResult<T> fetchPage(Integer count, List<T> list){
+		PageResult<T> result = new PageResult<>();
+		result.setCount(count);
+		result.setData(list);
+		return result;
 	}
 }
