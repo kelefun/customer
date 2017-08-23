@@ -3,3 +3,4 @@ layui.config({
 }).extend({ //设定组件别名
 	navtab: 'js/define/navtab',
 });
+
