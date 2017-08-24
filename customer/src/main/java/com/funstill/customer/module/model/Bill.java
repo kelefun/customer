@@ -19,12 +19,12 @@ public class Bill extends BaseModel {
 	/**
 	 * 应付款
 	 */
-	private Double payable;
+	private Integer payable;
 
 	/**
 	 * 已收款
 	 */
-	private Double received;
+	private Integer received;
 
 	/**
 	 * 付款方式
@@ -44,19 +44,19 @@ public class Bill extends BaseModel {
 		this.extra = extra;
 	}
 
-	public Double getPayable() {
+	public Integer getPayable() {
 		return payable;
 	}
 
-	public void setPayable(Double payable) {
+	public void setPayable(Integer payable) {
 		this.payable = payable;
 	}
 
-	public Double getReceived() {
+	public Integer getReceived() {
 		return received;
 	}
 
-	public void setReceived(Double received) {
+	public void setReceived(Integer received) {
 		this.received = received;
 	}
 

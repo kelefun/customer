@@ -73,7 +73,20 @@ public class HsqlUtil {
 		}
 		return result;
 	}
-
+	/*
+	 * 执行一句查询的sql
+	 */
+	public ResultSet executeQuery(String sql){
+		ResultSet result = null;
+		try{
+			pstmt = connection.prepareStatement(sql);
+			result = pstmt.executeQuery();
+			log.debug("sql={},params={}",sql);
+		}catch(SQLException se){
+			se.printStackTrace();
+		}
+		return result;
+	}
 	public Connection getConnection() {
 		try {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver"); // 注册驱动

@@ -21,4 +21,13 @@ public class PageController {
         return "view/customer/customer-insert.html";
     }
     
+    @GetMapping(value={"bill/index"})
+    public String billIndex() {
+    	return "view/bill/bill-index.html";
+    }
+    @GetMapping(value={"bill/insert"})
+    public String billInsert() {
+    	return "view/bill/bill-insert.html";
+    }
+    
 }
