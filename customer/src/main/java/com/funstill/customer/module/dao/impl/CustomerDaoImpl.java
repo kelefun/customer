@@ -20,11 +20,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Integer insert(Customer record) {
 		HsqlUtil hsql = new HsqlUtil();
 		hsql.getConnection();
-		String sql = "insert into customer (realname,mobile,extra,create_date) values (?,?,?,now())";
+		String sql = "insert into customer (realname,mobile,extra,create_date) values (?,?,?,CURRENT_TIMESTAMP)";
 		List<Object> params = new ArrayList<>();
 		params.add(record.getRealname());
 		params.add(record.getMobile());
 		params.add(record.getExtra());
+//		params.add(new Date());
 		Integer result = hsql.updateByPreparedStatement(sql, params);
 		hsql.releaseConn();
 		return result;
@@ -83,8 +84,8 @@ public class CustomerDaoImpl implements CustomerDao {
 				customer.setMobile(resultSet.getString("mobile"));
 				customer.setRealname(resultSet.getString("realname"));
 				customer.setExtra(resultSet.getString("extra"));
-				customer.setCreateDate(resultSet.getDate("create_date"));
-				customer.setCreateDate(resultSet.getDate("update_date"));
+				customer.setCreateDate(resultSet.getTimestamp("create_date"));
+				customer.setCreateDate(resultSet.getTimestamp("update_date"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -131,7 +132,8 @@ public class CustomerDaoImpl implements CustomerDao {
 				customer.setMobile(resultSet.getString("mobile"));
 				customer.setRealname(resultSet.getString("realname"));
 				customer.setExtra(resultSet.getString("extra"));
-				customer.setCreateDate(resultSet.getDate("create_date"));
+				customer.setCreateDate(resultSet.getTimestamp("create_date"));
+				customer.setUpdateDate(resultSet.getTimestamp("update_date"));
 				
 				customerList.add(customer);
 			}

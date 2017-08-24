@@ -2,6 +2,7 @@ package com.funstill.customer.module.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.funstill.customer.base.model.BaseModel;
 
 /**
@@ -19,6 +20,7 @@ public class Customer extends BaseModel{
 	
 	private String extra;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	
 	private Date updateDate;
