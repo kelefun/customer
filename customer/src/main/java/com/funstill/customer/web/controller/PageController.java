@@ -16,5 +16,9 @@ public class PageController {
     public String index() {
         return "view/customer/customer-index.html";
     }
+    @GetMapping(value={"customer/insert"})
+    public String insert() {
+        return "view/customer/customer-insert.html";
+    }
     
 }

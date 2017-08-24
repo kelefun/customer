@@ -105,18 +105,17 @@ public class CustomerDaoImpl implements CustomerDao {
 		String sql = "SELECT * FROM customer where 1 = 1";
 		List<Object> params = new ArrayList<>();
 		if (StringUtils.isNotBlank(query.getMobile())) {
-			sql += "and mobile = ? ";
-			params.add(query.getMobile());
+			sql += " and mobile like ? ";
+			params.add(query.getMobile()+"%");
 		}
 		if (StringUtils.isNotBlank(query.getRealname())) {
-			sql += "and realname = ? ";
-			params.add(query.getRealname());
+			sql += " and realname like ? ";
+			params.add("%"+query.getRealname()+"%");
 		}
 		if (StringUtils.isNotBlank(query.getExtra())) {
-			sql += "and extra = ? ";
-			params.add(query.getExtra());
-		}
-		
+			sql += " and extra like ? ";
+			params.add("%"+query.getExtra()+"%");
+		}	
 		if (query.isSetPage()) {
 			sql += " limit ? offset ? ";
 			params.add(query.getLimit());
@@ -153,24 +152,19 @@ public class CustomerDaoImpl implements CustomerDao {
 		HsqlUtil hsql = new HsqlUtil();
 		hsql.getConnection();
 		String sql = "SELECT count(1) FROM customer where 1 = 1";
+		
 		List<Object> params = new ArrayList<>();
 		if (StringUtils.isNotBlank(query.getMobile())) {
-			sql += "and mobile = ? ";
-			params.add(query.getMobile());
+			sql += " and mobile like ? ";
+			params.add(query.getMobile()+"%");
 		}
 		if (StringUtils.isNotBlank(query.getRealname())) {
-			sql += "and realname = ? ";
-			params.add(query.getRealname());
+			sql += " and realname like ? ";
+			params.add("%"+query.getRealname()+"%");
 		}
 		if (StringUtils.isNotBlank(query.getExtra())) {
-			sql += "and extra = ? ";
-			params.add(query.getExtra());
-		}
-		
-		if (query.isSetPage()) {
-			sql += " limit ? offset ? ";
-			params.add(query.getLimit());
-			params.add(query.getStartRow());
+			sql += " and extra like ? ";
+			params.add("%"+query.getExtra()+"%");
 		}
 		ResultSet resultSet = hsql.executeQuery(sql, params);
 		try {

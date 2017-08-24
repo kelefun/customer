@@ -33,6 +33,7 @@
 			<div class="layui-col-md2">
 
 				<button id="search" class="layui-btn">搜索</button>
+				<button id="refresh" class="layui-btn">刷新</button>
 			</div>
 			<div class="layui-col-md2 layui-col-md-offset8">
 				<button id="insert" class="layui-btn" style="float: right">新增客户</button>
@@ -50,10 +51,11 @@
   <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 		<script>
+			var customerTable;
 			layui.use('table', function() {
 				var $ = layui.jquery;
 				var table = layui.table;
-				var customerTable = table.render({ //其它参数在此省略
+				customerTable = table.render({ //其它参数在此省略
 					elem : "#customer-table",
 					url : "/customer/list",
 					page : true,
@@ -105,6 +107,9 @@
 						}
 					});
 				});
+				$("#refresh").click(function() {
+					customerTable.reload({where : {}});
+				});
 				//监听工具条
 				table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
 				  var data = obj.data; //获得当前行数据
@@ -133,8 +138,8 @@
 				
 			});
 			
-			function test(val){
-			    alert(val);
+			var reload=function(){
+				customerTable.reload({});
 			}
 		</script>
 </body>
