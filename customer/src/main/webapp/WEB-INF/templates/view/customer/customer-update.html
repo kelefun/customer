@@ -12,36 +12,39 @@
 </head>
 <body>
 	<div class="layui-container">
-	<div class="layui-row"><div class="layui-input-block"></div></div>
+		<div class="layui-row">
+			<div class="layui-input-block"></div>
+		</div>
 		<form class="layui-form" action="">
+		<input type="hidden" name="id" value="${customer.id}">
 			<div class="layui-form-item">
 				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-inline">
-					<input type="text" name="realname" required lay-verify="required"
-						placeholder="请输入客户姓名" autocomplete="off" class="layui-input">
+					<input type="text" name="realname" value="${customer.realname}" required lay-verify="required"
+						placeholder="请输入客户姓名"  autocomplete="off" class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">必填</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">手机</label>
 				<div class="layui-input-inline">
-					<input type="text" name="mobile" required
-						lay-verify="required|phone|number" maxlength="11" placeholder="请输入客户手机号码" autocomplete="off"
-						class="layui-input">
+					<input type="text" name="mobile" value="${customer.mobile}" required
+						lay-verify="required|phone|number" maxlength="11"
+						placeholder="请输入客户手机号码" autocomplete="off" class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">必填</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">单选框</label>
 				<div class="layui-input-block">
-					<input type="radio" name="sex" value="1" title="男" checked> <input
-						type="radio" name="sex" value="2" title="女">
+					<input type="radio" name="sex" value="1" title="男" checked>
+					<input type="radio" name="sex" value="2" title="女">
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">备注</label>
 				<div class="layui-input-block">
-					<textarea name="extra" placeholder="请输入备注信息" class="layui-textarea"></textarea>
+					<textarea name="extra"  placeholder="请输入备注信息" class="layui-textarea">${customer.extra}</textarea>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -63,7 +66,7 @@
 				var loading = layer.load(1, {
 					shade : [ 0.1, '#fff' ]
 				});
-				$.post("/customer/insert", data.field).success(function(data) {
+				$.post("/customer/update", data.field).success(function(data) {
 					if (data.code === 0) {
 						parent.reload(); //重载表格
 						//关闭当前页面

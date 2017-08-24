@@ -3,6 +3,7 @@ package com.funstill.customer.module.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Integer insert(Customer record) {
 		HsqlUtil hsql = new HsqlUtil();
 		hsql.getConnection();
+		//TODO CURRENT_TIMESTAMP 时区设置,不设置有时差
 		String sql = "insert into customer (realname,mobile,extra,create_date) values (?,?,?,CURRENT_TIMESTAMP)";
 		List<Object> params = new ArrayList<>();
 		params.add(record.getRealname());
@@ -61,7 +63,8 @@ public class CustomerDaoImpl implements CustomerDao {
 			sql += " extra = ? ,";
 			params.add(record.getExtra());
 		}
-		sql += " update_date = now() where id = ?";
+		sql += " update_date = ? where id = ?";
+		params.add(new Date());
 		params.add(record.getId());
 		Integer result = hsql.updateByPreparedStatement(sql, params);
 		hsql.releaseConn();

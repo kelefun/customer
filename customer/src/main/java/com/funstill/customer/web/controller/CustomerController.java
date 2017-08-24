@@ -9,10 +9,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.funstill.customer.base.exception.WebException;
 import com.funstill.customer.base.model.PageResult;
+import com.funstill.customer.base.model.ResultModel;
+import com.funstill.customer.base.result.DefaultResultCode;
 import com.funstill.customer.module.model.Customer;
 import com.funstill.customer.module.model.CustomerQuery;
 import com.funstill.customer.module.service.CustomerService;
@@ -43,20 +47,23 @@ public class CustomerController {
 
     @RequestMapping("/insert")
     @ResponseBody
-    public Integer insert(Customer customer) {
-        return customerService.insert(customer);
+    public ResultModel<Integer> insert(Customer customer) {
+        return new ResultModel<>(customerService.insert(customer)) ;
     }
     
     
     @RequestMapping("/update")
     @ResponseBody
-    public Integer update(Customer customer) {
-        return customerService.updateById(customer);
+    public ResultModel<Integer> update(Customer customer) {
+    	if(customer.getId()==null){
+    		throw new WebException(DefaultResultCode.ILLEGAL_ARGUMENT);
+    	}
+        return new ResultModel<>(customerService.updateById(customer));
     }
     @RequestMapping("/delete")
     @ResponseBody
-    public Integer delete(Long id) {
-        return customerService.deleteById(id);
+    public ResultModel<Integer> delete(@RequestParam Long id) {
+        return new ResultModel<>(customerService.deleteById(id));
     }
     
     

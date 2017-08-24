@@ -22,7 +22,7 @@ public class Customer extends BaseModel{
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
-	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateDate;
 
 	public String getRealname() {

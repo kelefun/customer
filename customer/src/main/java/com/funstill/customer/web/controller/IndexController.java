@@ -10,28 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping(value={"/","/index"})
-    public String index() {
-        return "view/index.html";
-    }
-    /**
-     * 登录页面
-     * @author liukaiyang 2017年8月22日
-     * @return
-     */
-    @GetMapping(value={"view/login"})
-    public String getLoginView() {
-        return "view/login.html";
-    }
-    
-    /**
-     * 登录实现
-     * @author liukaiyang 2017年8月22日
-     * @return
-     */
-    @GetMapping(value={"login"})
-    public String login() {
-    	//TODO 
-        return "view/index.html";
-    }
+	/**
+	 * 登录实现
+	 * 
+	 * @author liukaiyang 2017年8月22日
+	 * @return
+	 */
+	@GetMapping(value = { "login" })
+	public String login() {
+		// TODO
+		return "view/index.html";
+	}
 }
