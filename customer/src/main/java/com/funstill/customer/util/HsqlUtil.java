@@ -10,6 +10,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
+
 public class HsqlUtil {
 	private final Logger log=LogManager.getLogger("hsql=");
 	private Connection connection;
@@ -42,7 +44,7 @@ public class HsqlUtil {
 				}
 			}
 			result = pstmt.executeUpdate();
-			log.debug(pstmt.toString());
+			log.debug("sql={},params={}",sql,JSON.toJSONString(params));
 		}catch(SQLException se){
 			se.printStackTrace();
 		}
@@ -65,7 +67,7 @@ public class HsqlUtil {
 				}
 			}
 			result = pstmt.executeQuery();
-			log.debug(pstmt.toString());
+			log.debug("sql={},params={}",sql,JSON.toJSONString(params));
 		}catch(SQLException se){
 			se.printStackTrace();
 		}
