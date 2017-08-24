@@ -1,2 +1,2 @@
 # customer
-CRM web project , use hsqldb ,spring , jdbc
+CRM JAVA web project , use hsqldb ,spring , jdbc ,Layui
