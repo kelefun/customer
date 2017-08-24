@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -51,7 +52,16 @@ public class HsqlUtil {
 	
 		return result;
 	}
-
+	public void execute(String sql){
+		try{
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql);
+			log.debug("sql={}",sql);
+			stmt.close();
+		}catch(SQLException se){
+			se.printStackTrace();
+		}
+	}
 	/*
 	 * 执行一句查询的sql
 	 */
