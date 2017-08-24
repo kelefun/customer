@@ -20,7 +20,8 @@ public class Customer extends BaseModel{
 	private String extra;
 	
 	private Date createDate;
-
+	
+	private Date updateDate;
 
 	public String getRealname() {
 		return realname;
@@ -52,6 +53,14 @@ public class Customer extends BaseModel{
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 }

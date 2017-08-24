@@ -13,16 +13,9 @@
 <body>
 	<div class="layui-fluid">
 		<div class="layui-row">
-			<label class="layui-form-label">姓名</label>
+			<label class="layui-form-label">商品名称</label>
 			<div class="layui-input-block">
-				<input type="text" id="realname" placeholder="请输入客户姓名"
-					autocomplete="off" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-row">
-			<label class="layui-form-label">电话</label>
-			<div class="layui-input-block">
-				<input type="text" id="mobile" placeholder="请输入客户电话"
+				<input type="text" id="realname" placeholder="请输入商品名称"
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
@@ -36,7 +29,7 @@
 				<button id="refresh" class="layui-btn">刷新</button>
 			</div>
 			<div class="layui-col-md2 layui-col-md-offset8">
-				<button id="insert" class="layui-btn" style="float: right">新增客户</button>
+				<button id="insert" class="layui-btn" style="float: right">新增商品</button>
 			</div>
 		</div>
 
@@ -68,19 +61,23 @@
 						width : 50
 					}, {
 						field : 'realname',
-						title : '姓名',
+						title : '商品名称',
 						width : 100
 					}, {
 						field : 'mobile',
-						title : '电话',
+						title : '单价',
+						width : 120
+					}, {
+						field : 'mobile',
+						title : '单位',
+						width : 120
+					}, {
+						field : 'mobile',
+						title : '库存',
 						width : 120
 					}, {
 						field : 'createDate',
 						title : '创建时间',
-						width : 150
-					}, {
-						field : 'updateDate',
-						title : '更新时间',
 						width : 150
 					}, {
 						field : 'extra',

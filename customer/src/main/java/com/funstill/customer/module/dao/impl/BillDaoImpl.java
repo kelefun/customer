@@ -143,8 +143,31 @@ public class BillDaoImpl implements BillDao {
 
 	@Override
 	public Integer selectCountList(BillQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+		HsqlUtil hsql = new HsqlUtil();
+		hsql.getConnection();
+		String sql = "SELECT count(1) FROM bill where 1 = 1";
+		List<Object> params = new ArrayList<>();
+		if (query.getCreateDate()!=null) {
+			sql += "and (? - create_date)DAY = 0 ";
+			params.add(query.getCreateDate());
+		}
+		
+		ResultSet resultSet = hsql.executeQuery(sql, params);
+		try {
+			while (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		hsql.releaseConn();
+		return 0;
 	}
 
 }

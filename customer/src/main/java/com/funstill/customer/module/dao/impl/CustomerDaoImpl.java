@@ -84,6 +84,7 @@ public class CustomerDaoImpl implements CustomerDao {
 				customer.setRealname(resultSet.getString("realname"));
 				customer.setExtra(resultSet.getString("extra"));
 				customer.setCreateDate(resultSet.getDate("create_date"));
+				customer.setCreateDate(resultSet.getDate("update_date"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

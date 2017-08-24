@@ -28,7 +28,7 @@ import com.funstill.customer.base.result.DefaultResultCode;
 
 public class HandleExceptionResolver extends SimpleMappingExceptionResolver {
 
-	private Logger logger = LogManager.getLogger(getClass());
+	private Logger logger = LogManager.getLogger(HandleExceptionResolver.class);
 	private String annotationErrorView;
 
 	private Class<Annotation>[] classes;

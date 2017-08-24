@@ -30,4 +30,13 @@ public class PageController {
     	return "view/bill/bill-insert.html";
     }
     
+    
+    @GetMapping(value={"goods/index"})
+    public String goodsIndex() {
+    	return "view/goods/goods-index.html";
+    }
+    @GetMapping(value={"goods/insert"})
+    public String goodsInsert() {
+    	return "view/goods/goods-insert.html";
+    }
 }
